@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    {% block content %}
+        <form action="/send" method='POST'>
+            {% csrf_token %}
+            <h2> Add Order </h2>
+            <table border="1">
+                {% for cust_name in cname %}
+                <tr>
+                    <td>Customer</td>
+                    <td>
+                    <select name="first_name">
+                        <option selected disabled="True" > -- Select Customer -- </option>
+                        <option >{{ cust_name }}</option>
+                    </select>
+                </td>
+                </tr>
+                {% endfor %}
+                {% for prod in pname %}
+                <tr>
+                    <td>Product</td>
+                    <td>
+                        <select name="Pname">
+                        <option selected disabled="True" > -- Select Product -- </option>
+                        <option > {{ prod }} </option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% for pri in Price %}
+                <tr>
+                    <td>Price</td>
+                    <td><input type="text" name="Unit_price" value="{{pri}}" readonly="readonly"> </td>
+                </tr>
+                <tr>
+                    <td>Qty</td>
+                    <td><input type="number" name="qty"></td>
+                </tr>
+                <tr>
+                    <td>Total Price</td>
+                    <td>{{ Total_price }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button name="order" style="margin-left: 80px;">Place Order</button>
+                        <a href="home.html"> cancel </a>
+                    </td>
+                </tr>
+            </table>
+        </form>    
+        {% endblock content %}
+</body>
+</html>

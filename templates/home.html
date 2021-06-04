@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    {% block content %}
+        {% csrf_token %}
+        <center>
+        
+        <form action="/Order" style="border: 1ch;" method="POST">
+            
+                <h2>Order </h2>
+                <input type="text" name='q'>
+                <button> Search </button>
+                <input type="submit" value="Show Records">
+            
+        </form>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total_price</th>
+            </tr>
+            {% for d in data %}
+            <tr>
+                <td> {{ d.data.Customer_details.name }}</td>
+                <td> {{ d.data.Product_details.name }} </td>
+                <td> {{ d.data.Product_details.price(Product_details.name }} </td>
+                <td>{{ d.Qty }}</td>
+                <td>{{ d.Total_price }}</td>
+                <td><a href="/edit?id={{d.ID}}"> Edit </a></td>
+                <td><a href="/delete?id={{d.ID}}"> Delete </a></td>
+            </tr>
+           {% endfor %}
+        </table>
+        {% endblock content %}
+    </center>
+</body>
+</html>
